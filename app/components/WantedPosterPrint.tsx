@@ -176,15 +176,16 @@ const WantedPosterPrint = React.forwardRef<HTMLDivElement, WantedPosterPrintProp
             top: '615px',
             left: '0',
             width: '100%',
-            fontSize: name.length > 14 ? '60px' : '88px',
+            fontSize: `${Math.min(88, 800 / Math.max(1, (name || 'YOUR NAME').length))}px`,
             fontWeight: '900',
             letterSpacing: '0.04em',
             color: INK,
             textAlign: 'center',
-            lineHeight: 1.0,
+            lineHeight: 1.2,
             textTransform: 'uppercase',
             fontFamily: '"Times New Roman", serif',
-            wordBreak: 'break-word',
+            whiteSpace: 'nowrap',
+            padding: '0 20px',
           }}>
             {name || 'YOUR NAME'}
           </div>
