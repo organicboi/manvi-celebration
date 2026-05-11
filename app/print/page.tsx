@@ -212,28 +212,28 @@ export default function PrintPage() {
         }
 
         /* Responsive poster scaling */
-        .poster-scale-wrapper { transform: scale(1); transform-origin: top center; }
+        .poster-scale-wrapper { transform: scale(1); transform-origin: top left !important; }
         @media (max-width: 1023px) {
           .poster-scale-wrapper {
-            transform: scale(0.62);
-            transform-origin: top center;
-            margin-bottom: calc((842px * 0.62) - 842px);
+            transform: scale(0.62) !important;
+            margin-bottom: calc((842px * 0.62) - 842px) !important;
+            margin-right: calc((595px * 0.62) - 595px) !important;
           }
           #print-poster-wrapper { width: calc(595px * 0.62) !important; }
         }
-        @media (max-width: 639px) {
+        @media (max-width: 639px) { /* <640px is basically sm */
           .poster-scale-wrapper {
-            transform: scale(0.52);
-            transform-origin: top center;
-            margin-bottom: calc((842px * 0.52) - 842px);
+            transform: scale(0.52) !important;
+            margin-bottom: calc((842px * 0.52) - 842px) !important;
+            margin-right: calc((595px * 0.52) - 595px) !important;
           }
           #print-poster-wrapper { width: calc(595px * 0.52) !important; }
         }
         @media (max-width: 400px) {
           .poster-scale-wrapper {
-            transform: scale(0.44);
-            transform-origin: top center;
-            margin-bottom: calc((842px * 0.44) - 842px);
+            transform: scale(0.44) !important;
+            margin-bottom: calc((842px * 0.44) - 842px) !important;
+            margin-right: calc((595px * 0.44) - 595px) !important;
           }
           #print-poster-wrapper { width: calc(595px * 0.44) !important; }
         }
@@ -294,7 +294,7 @@ export default function PrintPage() {
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start justify-center">
 
             {/* ══ LEFT: CONTROLS PANEL ══ */}
-            <div className="w-full lg:w-90 shrink-0 order-2 lg:order-1">
+            <div className="w-full lg:w-96 shrink-0 order-2 lg:order-1">
               <div className="bg-[#fdf6e3] border-4 border-[#2d2a26] shadow-[6px_6px_0_rgba(45,42,38,0.4)] relative">
 
                 {/* Panel header */}
@@ -530,18 +530,17 @@ export default function PrintPage() {
 
                 {/* Scaled wrapper */}
                 <div
-                  className="shadow-2xl"
-                  style={{
-                    transform: 'rotate(-0.5deg)',
-                    transformOrigin: 'top center',
-                    filter: `drop-shadow(0 20px 40px rgba(0,0,0,${isDraggingState ? '0.7' : '0.5'}))`,
-                    transition: 'filter 0.15s',
-                  }}
+                  className="poster-scale-wrapper"
+                  style={{ width: '595px', transformOrigin: 'top left', position: 'relative' }}
                 >
-                  {/* Responsive scale wrapper */}
                   <div
-                    className="poster-scale-wrapper"
-                    style={{ width: '595px', transformOrigin: 'top center', position: 'relative' }}
+                    className="shadow-2xl"
+                    style={{
+                      transform: 'rotate(-0.5deg)',
+                      transformOrigin: 'top center',
+                      filter: `drop-shadow(0 20px 40px rgba(0,0,0,${isDraggingState ? '0.7' : '0.5'}))`,
+                      transition: 'filter 0.15s',
+                    }}
                   >
                     <WantedPosterPrint
                       ref={posterRef}
